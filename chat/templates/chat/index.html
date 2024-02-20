@@ -24,9 +24,14 @@
 		<header class="mdl-layout__header">
 			<div class="mdl-layout__header-row">
 				<!-- Title -->
-				<span class="mdl-layout-title"
-					>Willkomen, {{ request.user }}!</span
-				>
+				{% if request.user.is_authenticated %}
+				<span class="mdl-layout-title">
+					Willkomen, {{ request.user }}!
+				</span>
+				{% else %}
+				<span class="mdl-layout-title"> Willkommen! </span>
+				{% endif %}
+
 				<!-- Add spacer, to align navigation to the right -->
 				<div class="mdl-layout-spacer"></div>
 				<!-- Navigation. We hide it in small screens. -->
@@ -53,11 +58,14 @@
 
 				<!-- Textfield with Floating Label -->
 
-				<form action="#">
+				<form action="/chat/" method="post">
+					{% csrf_token %}
+					<!-- Generiert einen token-->
 					<div
 						class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
 					>
 						<input
+							name="messagefield"
 							class="mdl-textfield__input"
 							type="text"
 							id="sample3"
