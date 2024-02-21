@@ -38,11 +38,11 @@
 			<div class="mdl-layout__header-row">
 				<!-- Title -->
 				{% if request.user.is_authenticated %}
-				<span class="mdl-layout-title">
-					Willkomen, {{ request.user }}!
-				</span>
+					<span class="mdl-layout-title">
+						Willkomen, {{ request.user.first_name }}!
+					</span>
 				{% else %}
-				<span class="mdl-layout-title"> Willkommen! </span>
+					<span class="mdl-layout-title"> Willkommen! </span>
 				{% endif %}
 
 				<!-- Add spacer, to align navigation to the right -->
@@ -67,6 +67,8 @@
 		</div>
 		<main class="mdl-layout__content">
 			<div class="page-content">
+				{% if request.user.is_authenticated %}
+
 				<!-- Your content goes here -->
 
 				{% for message in chat_messages %}
@@ -100,6 +102,16 @@
 						Send
 					</button>
 				</form>
+
+				{% else %}
+
+				<h1>Not logged in!</h1>
+				<p>
+					You are not logged in. Please log in.<br />
+					Please follow the Link for <a href="/login">Login</a>.
+				</p>
+
+				{% endif %}
 			</div>
 		</main>
 	</div>
