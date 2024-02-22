@@ -1,5 +1,5 @@
-{% extends "templateMain.html" %}
-<!--Exportiert den Inhalt nach templateMain.html-->
+<!--Exportiert den Inhalt nach base.html-->
+{% extends "base.html" %}
 
 <!-- block content startet hier! -->
 {% block content %}
@@ -11,7 +11,6 @@
 {% endif %}
 
 <form method="POST" action="/login/">
-    
 	{% csrf_token %}
 
 	<input type="hidden" name="redirect" value="{{ redirect }}" />

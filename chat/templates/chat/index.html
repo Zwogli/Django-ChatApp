@@ -1,9 +1,10 @@
-<!--Exportiert den Inhalt nach templateMain.html-->
-{% extends "templateMain.html" %}
+<!--Exportiert den Inhalt nach base.html-->
+{% extends "base.html" %}
 
 <!-- block content startet hier! -->
-{% block content %} {% if request.user.is_authenticated %} {% for message in
-chat_messages %}
+{% block content %} {% if request.user.is_authenticated %}
+<!-- prettier-ignore -->
+{% for message in chat_messages %}
 <div class="chat-record">
 	<span class="color-gray">[ {{ message.created_at }} ]</span>
 	<i>{{ message.author }}</i>: {{ message.text }}

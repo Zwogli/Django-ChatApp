@@ -38,7 +38,8 @@ def login_view(request):
         
         if user:
             #Erfolgreicher Login, leitet URL weiter:
-            login(request, user)                                    
+            login(request, user)
+            print('request.GET.get(next)', request.GET.get('next'))                                    
             return HttpResponseRedirect(
                 request.POST.get('redirect')
             )
