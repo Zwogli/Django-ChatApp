@@ -1,0 +1,18 @@
+.chat-record {
+	margin-bottom: 50px;
+}
+.color-gray {
+	color: rgba(0, 0, 0, 0.4);
+}
+.page-content {
+	padding-top: 100px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.mdl-layout__header .mdl-layout__drawer-button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
