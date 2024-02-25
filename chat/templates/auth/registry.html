@@ -1,0 +1,96 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="demo-card-wide mdl-card mdl-shadow--2dp">
+	<div class="mdl-card__title">
+		<h1 class="mdl-card__title-text">Registry</h1>
+	</div>
+
+	<!-- {% if wrongPassword %}
+	<p>Wrong Password.</p>
+	{% endif %} -->
+
+	<div class="mdl-card__supporting-text">
+		<form method="POST" action="/registry/">
+			{% csrf_token %}
+
+			<!-- <input type="hidden" name="redirect" value="{{ redirect }}" /> -->
+
+			<div
+				class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
+			>
+				<input
+					class="mdl-textfield__input"
+					type="text"
+					id="sample3"
+					name="username"
+					required
+				/>
+				<label class="mdl-textfield__label" for="username"
+					>Username...</label
+				>
+			</div>
+
+			<div
+				class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
+			>
+				<input
+					class="mdl-textfield__input"
+					type="text"
+					id="first-name"
+					name="first-name"
+				/>
+				<label class="mdl-textfield__label" for="first-name"
+					>First name...</label
+				>
+			</div>
+
+			<div
+				class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
+			>
+				<input
+					class="mdl-textfield__input"
+					type="text"
+					id="last-name"
+					name="last-name"
+				/>
+				<label class="mdl-textfield__label" for="last-name"
+					>Last name...</label
+				>
+			</div>
+
+			<div
+				class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
+			>
+				<input
+					class="mdl-textfield__input"
+					type="text"
+					id="sample3"
+					name="password"
+					required
+				/>
+				<label class="mdl-textfield__label" for="username"
+					>Password...</label
+				>
+			</div>
+
+			<div>
+				<button
+					class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+				>
+					Login
+				</button>
+			</div>
+		</form>
+	</div>
+
+	<div class="mdl-card__actions mdl-card--border">
+		<a
+			class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+			href="/login/"
+		>
+			Back to Login
+		</a>
+	</div>
+</div>
+
+{% endblock%}

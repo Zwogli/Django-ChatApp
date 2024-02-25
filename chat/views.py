@@ -52,3 +52,7 @@ def login_view(request):
                 {'redirect':redirect}
             )
     return render(request, 'auth/login.html', {'redirect': redirect})
+
+
+def registry_view(request):
+    return render(request, 'auth/registry.html')
