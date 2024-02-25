@@ -63,4 +63,4 @@ def registry_view(request):
             password=request.POST.get('password')
         )
         user.save()
-    return render(request, 'auth/login.html')
+    return render(request, 'auth/registry.html')
