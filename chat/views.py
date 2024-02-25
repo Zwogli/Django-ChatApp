@@ -2,6 +2,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 from .models import Message, Chat
 
@@ -55,4 +56,11 @@ def login_view(request):
 
 
 def registry_view(request):
-    return render(request, 'auth/registry.html')
+    if request.method == 'POST':
+        user = User.objects.create_user(
+            username=request.POST.get('username'),
+            email=request.POST.get('email'),
+            password=request.POST.get('password')
+        )
+        user.save()
+    return render(request, 'auth/login.html')
