@@ -11,8 +11,28 @@
 </div>
 {% endfor %}
 
+<script>
+	async function sendMessage() {
+		let form = new FormData();
+		let djangoToken = '{{ csrf_token }}';
+		form.append("messagefield", messagefield.value); // append = anhängen
+		form.append("csrfmiddlewaretoken", djangoToken);
+
+		try {
+			await fetch("/chat/", {
+				method: "POST",
+				body: form,
+			});
+			console.log("Send message succes!");
+		} catch (e) {
+			console.error("FAIL send message!", e);
+		}
+	}
+</script>
+
 <!-- Textfield with Floating Label -->
-<form action="/chat/" method="POST">
+<form onsubmit="sendMessage(); return false;" method="POST">
+	<!-- action="/chat/" ausgetauscht mit onsubmit="sendMessage(); return false;"-->
 	{% csrf_token %}
 	<!-- Generiert einen token-->
 	<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -20,9 +40,9 @@
 			name="messagefield"
 			class="mdl-textfield__input"
 			type="text"
-			id="sample3"
+			id="messagefield"
 		/>
-		<label class="mdl-textfield__label" for="sample3">Text...</label>
+		<label class="mdl-textfield__label" for="messagefield">Text...</label>
 	</div>
 
 	<button
