@@ -16,13 +16,13 @@
 	justify-content: center;
 	align-items: center;
 }
-
 .demo-card-wide.mdl-card {
 	width: 512px;
 }
 .demo-card-wide > .mdl-card__title {
 	color: #fff;
 	height: 176px;
+	background: rgb(63, 81, 181) center / cover;
 }
 .demo-card-wide > .mdl-card__menu {
 	color: #fff;
