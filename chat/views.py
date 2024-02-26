@@ -1,5 +1,6 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -61,7 +62,9 @@ def login_user(request):
 
 def logout_user(request):
     logout(request)
-    pass
+    messages.success(request, ("You Have Been Logged Out."))
+    return redirect('login')
+    
 
 
 def registry_view(request):
