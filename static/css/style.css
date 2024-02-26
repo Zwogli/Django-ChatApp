@@ -1,8 +1,8 @@
-.chat-record {
-	margin-bottom: 50px;
-}
 .color-gray {
 	color: rgba(0, 0, 0, 0.4);
+}
+.form-style {
+	margin-top: 2rem !important;
 }
 .page-content {
 	padding-top: 100px;
