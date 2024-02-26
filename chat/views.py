@@ -40,10 +40,13 @@ def login_view(request):
         if user:
             #Erfolgreicher Login, leitet URL weiter:
             login(request, user)
-            print('request.GET.get(next)', request.GET.get('next'))                                    
-            return HttpResponseRedirect(
-                request.POST.get('redirect')
-            )
+            if redirect=='next':
+                return HttpResponseRedirect(
+                    request.POST.get('redirect')
+                )
+            else:
+                chat_messages = Message.objects.filter(chat__id=1)
+                return render(request, 'chat/index.html', {'chat_messages': chat_messages})
         else:
             #Fehlerhater Login, leitet zurück:
             return render(
