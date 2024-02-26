@@ -1,6 +1,6 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
@@ -29,16 +29,14 @@ def index(request):
     )
 
 
-def login_view(request):
+def login_user(request):
     redirect = request.GET.get('next')
     if request.method == 'POST':
-        user = authenticate(                                        #Django feature, prüft login daten
-            username=request.POST.get('username'), 
-            password=request.POST.get('password')
+        user = authenticate(                                        #check login inputs
+            username = request.POST.get('username'), 
+            password = request.POST.get('password')
         )
-        
-        if user:
-            #Erfolgreicher Login, leitet URL weiter:
+        if user is not None:                                        #Succesfully login, directs URL
             login(request, user)
             if redirect=='next':
                 return HttpResponseRedirect(
@@ -46,7 +44,10 @@ def login_view(request):
                 )
             else:
                 chat_messages = Message.objects.filter(chat__id=1)
-                return render(request, 'chat/index.html', {'chat_messages': chat_messages})
+                return render(
+                    request, 'chat/index.html', 
+                    {'chat_messages': chat_messages}
+                )
         else:
             #Fehlerhater Login, leitet zurück:
             return render(
@@ -56,6 +57,11 @@ def login_view(request):
                 {'redirect':redirect}
             )
     return render(request, 'auth/login.html', {'redirect': redirect})
+
+
+def logout_user(request):
+    logout(request)
+    pass
 
 
 def registry_view(request):

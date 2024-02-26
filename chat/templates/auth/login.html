@@ -2,7 +2,10 @@
 {% extends "base.html" %}
 
 <!-- block content startet hier! -->
-{% block content %}
+{% block content %} {% if request.user.is_authenticated %}
+<h1>You´re Already Logged In!</h1>
+
+{% else %}
 
 <div class="demo-card-wide mdl-card mdl-shadow--2dp">
 	<div class="mdl-card__title">
@@ -75,4 +78,4 @@
 	</div>
 </div>
 
-{% endblock %}
+{% endif %} {% endblock %}
