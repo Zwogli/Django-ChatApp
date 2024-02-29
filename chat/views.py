@@ -12,7 +12,6 @@ from .models import Message, Chat
 @login_required(login_url='/login/')                                #Verweist auf die Login Seite
 def index(request):
     if request.method == 'POST':                                    #Abfrage nach POST methode
-        print("Receive data " + request.POST['messagefield'])
         testChat = Chat.objects.get(id=1)                           #Erstellt statischen Chatroom
         Message.objects.create(                                     #Erstell Chat mit folgenden Inhalt ()
             text=request.POST['messagefield'], 
@@ -21,7 +20,6 @@ def index(request):
             receiver=request.user
         )    
     chat_messages = Message.objects.filter(chat__id=1)              #chat__id=1 = object__mit der id 1 => gibt ein Array zurück
-    print(chat_messages)
     #Rendert URL chat/index.html mit Inhalt aus der Datenbank 'chat_message':
     return render(                                                  
         request, 
@@ -67,7 +65,7 @@ def logout_user(request):
     
 
 
-def registry_view(request):
+def registry_user(request):
     if request.method == 'POST':
         user = User.objects.create_user(
             username=request.POST.get('username'),
