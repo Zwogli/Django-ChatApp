@@ -1,6 +1,13 @@
 .color-gray {
 	color: rgba(0, 0, 0, 0.4);
 }
+.div-row {
+	display: flex;
+	gap: 1rem;
+}
+.div-highlight {
+	margin: 1rem 0;
+}
 .form-style {
 	margin-top: 2rem !important;
 }
@@ -33,4 +40,11 @@
 }
 .demo-card-wide > .mdl-card__menu {
 	color: #fff;
+}
+
+@media screen and (max-width: 550px) {
+	.div-row {
+		flex-direction: column;
+		gap: unset;
+	}
 }
