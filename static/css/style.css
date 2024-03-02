@@ -5,7 +5,7 @@
 	margin-top: 2rem !important;
 }
 .page-content {
-	padding-top: 100px;
+	padding: 5rem 2rem;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -23,7 +23,8 @@
 	align-items: center;
 }
 .demo-card-wide.mdl-card {
-	width: 512px;
+	width: 100%;
+	max-width: 512px;
 }
 .demo-card-wide > .mdl-card__title {
 	color: #fff;
