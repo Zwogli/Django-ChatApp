@@ -33,7 +33,15 @@
 					<!-- Title -->
 					{% if request.user.is_authenticated %}
 					<span class="mdl-layout-title">
+						{% if request.user.first_name %}
+						<!--prettier-ignore  -->
 						Welcome, {{ request.user.first_name }}!
+						<!--prettier-ignore  -->
+						{% else %}
+						<!--prettier-ignore  -->
+						Welcome, {{ request.user }}!
+						<!--prettier-ignore  -->
+						{% endif %}
 					</span>
 					{% else %}
 					<span class="mdl-layout-title">

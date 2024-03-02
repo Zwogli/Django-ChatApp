@@ -3,9 +3,10 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
-from .models import Message, Chat
+from .models import Message, Chat, RegistryUser
 
 
 # Create your views here.
@@ -67,15 +68,24 @@ def logout_user(request):
 
 def registry_user(request):
     if request.method == 'POST':
-        user = User.objects.create_user(
-            username=request.POST.get('username'),
-            email=request.POST.get('email'),
-            password=request.POST.get('password')
-        )
-        user.save()
-        return render(
-            request, 
-            'auth/login.html', 
-            {'successfulRegistration': True}, 
-        )
-    return render(request, 'auth/registry.html')
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password1']
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            chat_messages = Message.objects.filter(chat__id=1)
+            return render(
+                request, 
+                'chat/index.html', 
+                {'chat_messages': chat_messages}
+            )
+        # return render(
+        #     request, 
+        #     'auth/login.html', 
+        #     {'successfulRegistration': True}, 
+        # )
+    else:
+        form = UserCreationForm()
+    return render(request, 'auth/registry.html', {'form': form,})

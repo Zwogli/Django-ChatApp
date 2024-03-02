@@ -5,17 +5,16 @@
 		<h1 class="mdl-card__title-text">Registry</h1>
 	</div>
 
-	<!-- {% if wrongPassword %}
-	<p>Wrong Password.</p>
+	<!-- {% if form.errors %}
+	<p>An Error of your Form appeared.</p>
 	{% endif %} -->
 
 	<div class="mdl-card__supporting-text">
-		<form method="POST" action="/registry/">
-			{% csrf_token %}
-
+		<form method="POST" action="{% url 'registry' %}">
+			{% csrf_token %} {{ form.as_p }}
 			<!-- <input type="hidden" name="redirect" value="{{ redirect }}" /> -->
 
-			<div class="div-row">
+			<!-- <div class="div-row">
 				<div
 					class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
 				>
@@ -103,11 +102,11 @@
 						>Password repeat...</label
 					>
 				</div>
-			</div>
+			</div> -->
 
 			<!-- <div> -->
 			<button
-				class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+				class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent btn-registry"
 			>
 				Sign in
 			</button>
