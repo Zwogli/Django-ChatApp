@@ -6,7 +6,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
-from .models import Message, Chat, RegistryUser
+from .models import Message, Chat
+from .forms import RegisterUserForm
 
 
 # Create your views here.
@@ -68,7 +69,7 @@ def logout_user(request):
 
 def registry_user(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = RegisterUserForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data['username']
@@ -81,11 +82,6 @@ def registry_user(request):
                 'chat/index.html', 
                 {'chat_messages': chat_messages}
             )
-        # return render(
-        #     request, 
-        #     'auth/login.html', 
-        #     {'successfulRegistration': True}, 
-        # )
     else:
-        form = UserCreationForm()
+        form = RegisterUserForm()       #Load custom register form, form.py
     return render(request, 'auth/registry.html', {'form': form,})
