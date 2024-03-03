@@ -4,12 +4,11 @@ from django import forms
 
 
 class RegisterUserForm(UserCreationForm):
-    """
-        widgets = add style form fields
-    """
+    # widgets = add style form fields
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class':'form-control'}))
     first_name = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'class':'form-control'}))
     last_name = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'class':'form-control'}))
+
 
     class Meta:
         model = User

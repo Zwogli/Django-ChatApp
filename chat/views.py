@@ -3,25 +3,23 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
 
 from .models import Message, Chat
 from .forms import RegisterUserForm
 
 
 # Create your views here.
-@login_required(login_url='/login_user/')                                #Verweist auf die Login Seite
+@login_required(login_url='/login_user/')                           #Refers to login page
 def index(request):
-    if request.method == 'POST':                                    #Abfrage nach POST methode
-        testChat = Chat.objects.get(id=1)                           #Erstellt statischen Chatroom
-        Message.objects.create(                                     #Erstell Chat mit folgenden Inhalt ()
+    if request.method == 'POST':                                    #Query by POST methode, Query = dt. Abfrage
+        testChat = Chat.objects.get(id=1)                           #Creates static Chatroom
+        Message.objects.create(                                     #Create a Chat with following elements
             text=request.POST['messagefield'], 
             chat=testChat, 
             author=request.user, 
             receiver=request.user
         )    
-    chat_messages = Message.objects.filter(chat__id=1)              #chat__id=1 = object__mit der id 1 => gibt ein Array zurück
+    chat_messages = Message.objects.filter(chat__id=1)              #chat__id=1 = object__mit der id 1 => returns an Array
     #Rendert URL chat/index.html mit Inhalt aus der Datenbank 'chat_message':
     return render(                                                  
         request, 
@@ -50,7 +48,7 @@ def login_user(request):
                     {'chat_messages': chat_messages}
                 )
         else:
-            #Fehlerhater Login, leitet zurück:
+            #Incorrect login, redirects:
             return render(
                 request, 
                 'auth/login_user.html', 
@@ -83,5 +81,5 @@ def registry_user(request):
                 {'chat_messages': chat_messages}
             )
     else:
-        form = RegisterUserForm()       #Load custom register form, form.py
+        form = RegisterUserForm()       #Load custom register form 'form.py'
     return render(request, 'auth/registry_user.html', {'form': form,})

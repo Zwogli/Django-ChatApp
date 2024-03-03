@@ -57,7 +57,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'templates')         #importiert die Daten aus dem templates Ordner
+            os.path.join(BASE_DIR, 'templates')         #imports the data from the 'templates' folder
         ],
         'APP_DIRS': True,
         'OPTIONS': {

@@ -1,7 +1,7 @@
-<!--Exportiert den Inhalt nach base.html-->
+<!--Exports the content to base.html-->
 {% extends "base.html" %}
 
-<!-- block content startet hier! -->
+<!-- block content starts here! -->
 {% block content %} {% if request.user.is_authenticated %}
 
 <script>
@@ -55,9 +55,9 @@
 	onsubmit="sendMessage(request.user.first_name); return false;"
 	method="POST"
 >
-	<!-- action="/chat/" ausgetauscht mit onsubmit="sendMessage(); return false;"-->
+	<!-- action="/chat/" changed with onsubmit="sendMessage(); return false;"-->
 	{% csrf_token %}
-	<!-- Generiert einen token-->
+	<!-- Generates a token-->
 	<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 		<input
 			name="messagefield"
