@@ -50,7 +50,11 @@
 </div>
 
 <!-- Textfield with Floating Label request.user.first_name -->
-<form class="form-style" onsubmit="sendMessage(request.user.first_name); return false;" method="POST">
+<form
+	class="form-style"
+	onsubmit="sendMessage(request.user.first_name); return false;"
+	method="POST"
+>
 	<!-- action="/chat/" ausgetauscht mit onsubmit="sendMessage(); return false;"-->
 	{% csrf_token %}
 	<!-- Generiert einen token-->
@@ -66,6 +70,7 @@
 
 	<button
 		class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+		type="submit"
 	>
 		Send
 	</button>
