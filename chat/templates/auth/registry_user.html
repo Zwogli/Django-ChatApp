@@ -1,0 +1,38 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="demo-card-wide mdl-card mdl-shadow--2dp">
+	<div class="mdl-card__title">
+		<h1 class="mdl-card__title-text">Registry</h1>
+	</div>
+
+	<!-- 
+	{% if form.errors %}
+	<p>An Error of your Form appeared.</p>
+	{% endif %} 
+	-->
+
+	<div class="mdl-card__supporting-text">
+		<form method="POST" action="{% url 'registry_user' %}">
+			{% csrf_token %}
+			<!--prettier-ignore-->
+			{{ form.as_p }}
+
+			<button
+				class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent btn-registry"
+			>
+				Sign in
+			</button>
+		</form>
+	</div>
+
+	<div class="mdl-card__actions mdl-card--border">
+		<a
+			class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+			href="{% url 'login_user' %}"
+		>
+			Back to Login
+		</a>
+	</div>
+</div>
+
+{% endblock%}

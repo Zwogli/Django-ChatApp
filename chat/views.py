@@ -11,7 +11,7 @@ from .forms import RegisterUserForm
 
 
 # Create your views here.
-@login_required(login_url='/login/')                                #Verweist auf die Login Seite
+@login_required(login_url='/login_user/')                                #Verweist auf die Login Seite
 def index(request):
     if request.method == 'POST':                                    #Abfrage nach POST methode
         testChat = Chat.objects.get(id=1)                           #Erstellt statischen Chatroom
@@ -53,17 +53,17 @@ def login_user(request):
             #Fehlerhater Login, leitet zurück:
             return render(
                 request, 
-                'auth/login.html', 
+                'auth/login_user.html', 
                 {'wrongPassword': True}, 
                 {'redirect':redirect}
             )
-    return render(request, 'auth/login.html', {'redirect': redirect})
+    return render(request, 'auth/login_user.html', {'redirect': redirect})
 
 
 def logout_user(request):
     logout(request)
     messages.success(request, ("You Have Been Logged Out."))
-    return redirect('login')
+    return redirect('login_user')
     
 
 
@@ -84,4 +84,4 @@ def registry_user(request):
             )
     else:
         form = RegisterUserForm()       #Load custom register form, form.py
-    return render(request, 'auth/registry.html', {'form': form,})
+    return render(request, 'auth/registry_user.html', {'form': form,})

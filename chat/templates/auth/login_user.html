@@ -13,7 +13,7 @@
 	</div>
 
 	<div class="mdl-card__supporting-text">
-		<form method="POST" action="/login/">
+		<form method="POST" action="/login_user/">
 			{% csrf_token %}
 
 			<input type="hidden" name="redirect" value="{{ redirect }}" />
@@ -70,9 +70,8 @@
 	<div class="mdl-card__actions mdl-card--border">
 		<a
 			class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
-			href="{% url 'registry' %}"
+			href="{% url 'registry_user' %}"
 		>
-			<!--href="/registry/" -->
 			Register Now
 		</a>
 	</div>

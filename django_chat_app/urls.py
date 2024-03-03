@@ -22,7 +22,7 @@ from chat.views import index, login_user, logout_user, registry_user
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('chat/', index, name="chat"),
-    path('login/', login_user, name="login"),
-    path('logout', logout_user, name="logout"),
-    path('registry/', registry_user, name="registry"),
+    path('login_user/', login_user, name="login_user"),
+    path('logout_user', logout_user, name="logout_user"),
+    path('registry_user/', registry_user, name="registry_user"),
 ]
