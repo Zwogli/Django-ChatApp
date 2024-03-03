@@ -4,42 +4,7 @@
 <!-- block content starts here! -->
 {% block content %} {% if request.user.is_authenticated %}
 
-<script>
-	/*
-	async function sendMessage() {
-		let form = new FormData();
-		let djangoToken = "{{ csrf_token }}";
-		form.append("messagefield", messagefield.value); // append = anhängen
-		form.append("csrfmiddlewaretoken", djangoToken);
-
-		try {
-			messageContainer.innerHTML += `
-			<div id="messagePreview">
-				<span class="color-gray">[Datum]</span>
-				<i class="color-gray">{{ request.user.first_name }}:</i> <div class="color-gray">${messagefield.value}</div>
-			</div>
-			`;
-			await fetch("/chat/", {
-				method: "POST",
-				body: form,
-			});
-
-			document.getElementById("messagePreview").remove();
-			messageContainer.innerHTML += `
-			<div>
-				<span class="color-gray">[Datum]</span>
-				<i>{{ request.user.first_name }}:</i> <div>${messagefield.value}</div>
-			</div>
-			`;
-			
-			console.log("Send message succes!");
-		} catch (e) {
-			console.error("FAIL send message!", e);
-		}
-	}
-	*/
-</script>
-
+<!-- Render messages -->
 <div id="messageContainer">
 	{% for message in chat_messages %}
 	<div>
@@ -49,23 +14,26 @@
 	{% endfor %}
 </div>
 
-<!-- Textfield with Floating Label request.user.first_name -->
+<!-- Textfield with Floating Label -->
 <form
-	class="form-style"
-	onsubmit="sendMessage(request.user.first_name); return false;"
+	onsubmit="sendMessage(); return false;"
 	method="POST"
+	id="chatForm"
+	class="form-style"
 >
-	<!-- action="/chat/" changed with onsubmit="sendMessage(); return false;"-->
-	{% csrf_token %}
 	<!-- Generates a token-->
+	{% csrf_token %}
+	<input type="hidden" id="csrfToken" value="{{ csrf_token }}" />
+	<input type="hidden" id="userName" value="{{ request.user.username }}" />
+
 	<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 		<input
-			name="messagefield"
+			name="messageField"
 			class="mdl-textfield__input"
 			type="text"
-			id="messagefield"
+			id="messageField"
 		/>
-		<label class="mdl-textfield__label" for="messagefield">Text...</label>
+		<label class="mdl-textfield__label" for="messageField">Text...</label>
 	</div>
 
 	<button

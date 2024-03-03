@@ -20,6 +20,9 @@
 .form-style {
 	margin-top: 2rem !important;
 }
+.htmlTemplateMessage {
+	display: flex;
+}
 .page-content {
 	padding: 5rem 2rem;
 	display: flex;

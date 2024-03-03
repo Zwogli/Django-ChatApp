@@ -1,4 +1,5 @@
-from django.http import HttpResponseRedirect
+from django.core import serializers
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -13,12 +14,16 @@ from .forms import RegisterUserForm
 def index(request):
     if request.method == 'POST':                                    #Query by POST methode, Query = dt. Abfrage
         testChat = Chat.objects.get(id=1)                           #Creates static Chatroom
-        Message.objects.create(                                     #Create a Chat with following elements
-            text=request.POST['messagefield'], 
+        Message.objects.create(                       #Create a Chat with following elements (new_message = )
+            text=request.POST['messageField'], 
             chat=testChat, 
             author=request.user, 
             receiver=request.user
-        )    
+        )
+        # serialized_message = serializers.serialize(                 #Creates a Array (json) from an object
+        #     'json', [new_message,]
+        # ) 
+        # return JsonResponse(serialized_message[1:-1], safe=False)
     chat_messages = Message.objects.filter(chat__id=1)              #chat__id=1 = object__mit der id 1 => returns an Array
     #Rendert URL chat/index.html mit Inhalt aus der Datenbank 'chat_message':
     return render(                                                  

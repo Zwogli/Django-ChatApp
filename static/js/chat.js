@@ -1,32 +1,77 @@
-// {{ request.user.first_name }}
-async function sendMessage(user) {
-	let form = new FormData();
-	let djangoToken = "{{ csrf_token }}";
-	form.append("messagefield", messagefield.value); // append = anhängen
-	form.append("csrfmiddlewaretoken", djangoToken);
+async function sendMessage() {
+	const messageObject = createMessageObject();
+	const csrfToken = document.getElementById("csrfToken").value;
+	let messageForm = new FormData();
+	messageForm.append("messageField", messageField.value); // append = anhängen
+	messageForm.append("csrfmiddlewaretoken", csrfToken);
+
 	try {
-		messageContainer.innerHTML += `
-        <div id="messagePreview">
-            <span class="color-gray">[Datum]</span>
-            
-            <i class="color-gray">${user}:</i> <div class="color-gray">${messagefield.value}</div>
-        </div>
-        `;
-		// debugger;
-		// await fetch("/chat/", {
+		createTemporaryHtmlTemplateMessage(messageObject);
+		await respondChat(messageForm);
+
+		// let response = await fetch("/chat/", {
 		// 	method: "POST",
-		// 	body: form,
+		// 	body: messageForm,
 		// });
 
-		// document.getElementById("messagePreview").remove();
-		// messageContainer.innerHTML += `
-		// <div>
-		//     <span class="color-gray">[Datum]</span>
-		//     <i>{{ request.user.first_name }}:</i> <div>${messagefield.value}</div>
-		// </div>
-		// `;
+		// let json = await response.json();
+		// console.log("json is: ", json);
+		removeTemporaryHtmlTemplateMessage();
+		createHtmlTemplateMessage(messageObject);
+
 		console.log("Send message succes!");
 	} catch (e) {
 		console.error("FAIL send message!", e);
 	}
+}
+
+function createMessageObject() {
+	return {
+		date: createNewDate(),
+		userName: document.getElementById("userName").value,
+		message: messageField.value,
+	};
+}
+
+function createNewDate() {
+	let currentDate = new Date();
+
+	var formattedDate =
+		shortcuttedMonth[currentDate.getMonth()] +
+		" " +
+		currentDate.getDate() +
+		", " +
+		currentDate.getFullYear();
+
+	return formattedDate;
+}
+
+function createTemporaryHtmlTemplateMessage(messageObject) {
+	return (messageContainer.innerHTML += `
+        <div id="messagePreview" class="htmlTemplateMessage">
+            <span class="color-gray">[ ${messageObject.date} ]</span>
+            
+            <i class="color-gray">&nbsp;${messageObject.userName}:&nbsp;</i> <span class="color-gray">${messageObject.message}</span>
+        </div>
+        `);
+}
+
+async function respondChat(messageForm) {
+	await fetch("/chat/", {
+		method: "POST",
+		body: messageForm,
+	});
+}
+
+function removeTemporaryHtmlTemplateMessage() {
+	return document.getElementById("messagePreview").remove();
+}
+
+function createHtmlTemplateMessage(messageObject) {
+	return (messageContainer.innerHTML += `
+		<div class="htmlTemplateMessage">
+		    <span class="color-gray">[ ${messageObject.date} ]</span>
+		    <i>&nbsp;${messageObject.userName}:&nbsp; </i> <span>${messageObject.message}</span>
+		</div>
+		`);
 }
