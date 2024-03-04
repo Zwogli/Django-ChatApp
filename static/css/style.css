@@ -1,3 +1,6 @@
+html {
+	scroll-behavior: smooth;
+}
 .btn-registry {
 	margin-top: 1rem;
 }
