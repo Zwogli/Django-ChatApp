@@ -48,11 +48,15 @@ function createNewDate() {
 
 function createTemporaryHtmlTemplateMessage(messageObject) {
 	return (messageContainer.innerHTML += `
-        <div id="messagePreview" class="htmlTemplateMessage">
-            <span class="color-gray">[ ${messageObject.date} ]</span>
-            
-            <i class="color-gray">&nbsp;${messageObject.userName}:&nbsp;</i> <span class="color-gray">${messageObject.message}</span>
-        </div>
+		<div class="message__right">
+    	    <div id="messagePreview" class="message--user message__bubble--user htmlTemplateMessage">
+				<div>
+    	        	<span class="color-gray">[ ${messageObject.date} ]</span>
+    	        	<i class="color-gray">&nbsp;${messageObject.userName}:&nbsp;</i> 
+				</div>	
+				<span class="color-gray">${messageObject.message}</span>
+    	    </div>
+		</div>
         `);
 }
 
@@ -69,9 +73,14 @@ function removeTemporaryHtmlTemplateMessage() {
 
 function createHtmlTemplateMessage(messageObject) {
 	return (messageContainer.innerHTML += `
-		<div class="htmlTemplateMessage">
-		    <span class="color-gray">[ ${messageObject.fields.created_at} ]</span>
-		    <i>&nbsp;${messageObject.fields.author_name}:&nbsp; </i> <span>${messageObject.fields.text}</span>
+		<div class="message__right">
+			<div class="message--user message__bubble--user htmlTemplateMessage">
+				<div>
+			    	<span class="color-gray">[ ${messageObject.fields.created_at} ]</span>
+			    	<i>&nbsp;${messageObject.fields.author_name}:&nbsp; </i> 
+				</div>	
+				<span>${messageObject.fields.text}</span>
+			</div>
 		</div>
 		`);
 }
