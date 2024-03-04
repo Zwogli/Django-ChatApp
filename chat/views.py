@@ -1,4 +1,3 @@
-from django.core import serializers
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
@@ -21,10 +20,9 @@ def index(request):
             author=request.user, 
             receiver=request.user
         )
-        serialized_message = serializers.serialize(                 #Creates a Array (json) from an object
-            'json', [new_message,]
-        ) 
-        return JsonResponse(serialized_message[1:-1], safe=False)     #[1:-1] remove substring
+        serialized_message = serializeJson(request, new_message)             #json array from object
+        print("serialized_message :", serialized_message)
+        return JsonResponse(serialized_message, safe=False)   #[1:-1] remove substring
     chat_messages = Message.objects.filter(chat__id=1)              #chat__id=1 = object__mit der id 1 => returns an Array
     #Rendert URL chat/index.html mit Inhalt aus der Datenbank 'chat_message':
     return render(                                                  

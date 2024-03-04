@@ -16,8 +16,12 @@ async function sendMessage() {
 
 		let json = await response.json();
 		console.log("json is: ", json);
+		// let objChat = JSON.parse(json);
+
+		console.log("Get Author name: ", json.fields.author_name);
+
 		removeTemporaryHtmlTemplateMessage();
-		createHtmlTemplateMessage(messageObject);
+		createHtmlTemplateMessage(json);
 
 		console.log("Send message succes!");
 	} catch (e) {
@@ -70,8 +74,8 @@ function removeTemporaryHtmlTemplateMessage() {
 function createHtmlTemplateMessage(messageObject) {
 	return (messageContainer.innerHTML += `
 		<div class="htmlTemplateMessage">
-		    <span class="color-gray">[ ${messageObject.date} ]</span>
-		    <i>&nbsp;${messageObject.userName}:&nbsp; </i> <span>${messageObject.message}</span>
+		    <span class="color-gray">[ ${messageObject.fields.created_at} ]</span>
+		    <i>&nbsp;${messageObject.fields.author_name}:&nbsp; </i> <span>${messageObject.fields.text}</span>
 		</div>
 		`);
 }
