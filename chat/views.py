@@ -9,21 +9,18 @@ from .forms import RegisterUserForm
 from .utils import *
 
 
+chat_id_number = 1
+
+
 # Create your views here.
 @login_required(login_url='/login_user/')                           #Refers to login page
 def index(request):
     if isRequestPost(request):                                    
-        testChat = Chat.objects.get(id=1)                           #Creates static Chatroom
-        new_message = Message.objects.create(                       #Create a Chat with following elements (new_message = )
-            text=request.POST['messageField'], 
-            chat=testChat, 
-            author=request.user, 
-            receiver=request.user
-        )
-        serialized_message = serializeJson(request, new_message)             #json array from object
-        print("serialized_message :", serialized_message)
-        return JsonResponse(serialized_message, safe=False)   #[1:-1] remove substring
-    chat_messages = Message.objects.filter(chat__id=1)              #chat__id=1 = object__mit der id 1 => returns an Array
+        testChat = Chat.objects.get(id=chat_id_number)              #Creates static Chatroom
+        new_message = createMessage(request, testChat)
+        serialized_message = serializeJson(request, new_message)    #json array from object
+        return JsonResponse(serialized_message, safe=False)
+    chat_messages = filterChatMessages(chat_id_number)              #returns Array
     #Rendert URL chat/index.html mit Inhalt aus der Datenbank 'chat_message':
     return render(                                                  
         request, 
@@ -39,14 +36,14 @@ def login_user(request):
             username = request.POST.get('username'), 
             password = request.POST.get('password')
         )
-        if user is not None:                                        #Succesfully login, directs URL
+        if isUserExist(user):                                        #Succesfully login, directs URL
             login(request, user)
             if redirect=='next':
                 return HttpResponseRedirect(
                     request.POST.get('redirect')
                 )
             else:
-                chat_messages = Message.objects.filter(chat__id=1)
+                chat_messages = filterChatMessages(chat_id_number) 
                 return render(
                     request, 'chat/index.html', 
                     {'chat_messages': chat_messages}
@@ -78,7 +75,7 @@ def registry_user(request):
             password = form.cleaned_data['password1']
             user = authenticate(username=username, password=password)
             login(request, user)
-            chat_messages = Message.objects.filter(chat__id=1)
+            chat_messages = filterChatMessages(chat_id_number)
             return render(
                 request, 
                 'chat/index.html', 

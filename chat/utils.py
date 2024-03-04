@@ -1,9 +1,23 @@
-from django.core import serializers
+from .models import Message
 
 
 def isRequestPost(request):
     #Query by POST methode, Query = dt. Abfrage
     return request.method == 'POST'
+
+
+def isUserExist(user):
+    return user is not None
+
+
+def createMessage(request, chat):
+    return (Message.objects.create(                       #Create a Chat with following elements (new_message = )
+            text=request.POST['messageField'], 
+            chat=chat, 
+            author=request.user, 
+            receiver=request.user
+        )
+    )
 
 
 def serializeJson(request, object):
@@ -23,3 +37,8 @@ def serializeJson(request, object):
                 'author_name': request.user.username
             }
         }
+    
+    
+def filterChatMessages(id_number):
+    #returns an array from chat__id=chat id number
+    return Message.objects.filter(chat__id=id_number)
