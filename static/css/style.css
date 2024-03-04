@@ -32,6 +32,7 @@
 	align-items: center;
 }
 #messageContainer {
+	padding: 0 1rem;
 	max-height: calc(100dvh - 5rem);
 	width: 80dvw;
 	overflow: auto;
@@ -93,6 +94,27 @@
 }
 .demo-card-wide > .mdl-card__menu {
 	color: #fff;
+}
+
+/* width */
+::-webkit-scrollbar {
+	width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: rgba(255, 64, 129, 0.1);
+	border-radius: 1rem;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: rgba(63, 81, 181, 0.4);
+	border-radius: 1rem;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: rgba(63, 81, 181, 0.6);
 }
 
 @media screen and (max-width: 550px) {
