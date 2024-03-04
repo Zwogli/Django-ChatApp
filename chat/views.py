@@ -14,7 +14,7 @@ chat_id_number = 1
 
 # Create your views here.
 @login_required(login_url='/login_user/')                           #Refers to login page
-def index(request):
+def chat(request):
     if isRequestPost(request):                                    
         testChat = Chat.objects.get(id=chat_id_number)              #Creates static Chatroom
         new_message = createMessage(request, testChat)
@@ -24,7 +24,7 @@ def index(request):
     #Rendert URL chat/index.html mit Inhalt aus der Datenbank 'chat_message':
     return render(                                                  
         request, 
-        'chat/index.html', 
+        'chat/chat.html', 
         {'chat_messages': chat_messages}
     )
 
@@ -45,18 +45,18 @@ def login_user(request):
             else:
                 chat_messages = filterChatMessages(chat_id_number) 
                 return render(
-                    request, 'chat/index.html', 
+                    request, 'chat/chat.html', 
                     {'chat_messages': chat_messages}
                 )
         else:
             #Incorrect login, redirects:
             return render(
                 request, 
-                'auth/login_user.html', 
+                'auth/login.html', 
                 {'wrongPassword': True}, 
                 {'redirect':redirect}
             )
-    return render(request, 'auth/login_user.html', {'redirect': redirect})
+    return render(request, 'auth/login.html', {'redirect': redirect})
 
 
 def logout_user(request):
@@ -78,9 +78,9 @@ def registry_user(request):
             chat_messages = filterChatMessages(chat_id_number)
             return render(
                 request, 
-                'chat/index.html', 
+                'chat/chat.html', 
                 {'chat_messages': chat_messages}
             )
     else:
         form = RegisterUserForm()       #Load custom register form 'form.py'
-    return render(request, 'auth/registry_user.html', {'form': form,})
+    return render(request, 'auth/registry.html', {'form': form,})
