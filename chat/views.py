@@ -7,14 +7,15 @@ from django.contrib.auth.decorators import login_required
 
 from .models import Message, Chat
 from .forms import RegisterUserForm
+from .utils import *
 
 
 # Create your views here.
 @login_required(login_url='/login_user/')                           #Refers to login page
 def index(request):
-    if request.method == 'POST':                                    #Query by POST methode, Query = dt. Abfrage
+    if isRequestPost(request):                                    
         testChat = Chat.objects.get(id=1)                           #Creates static Chatroom
-        Message.objects.create(                       #Create a Chat with following elements (new_message = )
+        new_message = Message.objects.create(                       #Create a Chat with following elements (new_message = )
             text=request.POST['messageField'], 
             chat=testChat, 
             author=request.user, 
@@ -35,7 +36,7 @@ def index(request):
 
 def login_user(request):
     redirect = request.GET.get('next')
-    if request.method == 'POST':
+    if isRequestPost(request):
         user = authenticate(                                        #check login inputs
             username = request.POST.get('username'), 
             password = request.POST.get('password')
@@ -71,7 +72,7 @@ def logout_user(request):
 
 
 def registry_user(request):
-    if request.method == 'POST':
+    if isRequestPost(request):
         form = RegisterUserForm(request.POST)
         if form.is_valid():
             form.save()
