@@ -56,7 +56,7 @@ html {
 	flex-direction: column;
 	margin-bottom: 1rem;
 	padding: 1rem 2rem;
-	max-width: 50%;
+	max-width: 60%;
 }
 .message--user {
 	display: flex;
@@ -64,16 +64,16 @@ html {
 	align-items: flex-end;
 	margin-bottom: 1rem;
 	padding: 1rem 2rem;
-	max-width: 50%;
+	max-width: 60%;
 }
 .message__bubble {
-	width: 50%;
+	width: 60%;
 	background-color: rgba(63, 81, 181, 0.5);
 	border-radius: 2rem;
 	box-shadow: 0.2rem 0.2rem 0.5rem rgba(0, 0, 0, 0.4);
 }
 .message__bubble--user {
-	width: 50%;
+	width: 60%;
 	background-color: rgba(255, 64, 129, 0.5);
 	border-radius: 2rem;
 	box-shadow: 0.2rem 0.2rem 0.5rem rgba(0, 0, 0, 0.4);

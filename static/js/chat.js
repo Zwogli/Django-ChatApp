@@ -7,18 +7,11 @@ async function sendMessage() {
 
 	try {
 		createTemporaryHtmlTemplateMessage(messageObject);
-		// await respondChat(messageForm);
-
-		let response = await fetch("/chat/", {
-			method: "POST",
-			body: messageForm,
-		});
-
-		let json = await response.json();
-
+		let responseChat = await respondChat(messageForm);
+		let jsonChat = await responseChat.json();
 		removeTemporaryHtmlTemplateMessage();
-		createHtmlTemplateMessage(json);
-
+		createHtmlTemplateMessage(jsonChat);
+		clearInput(messageField);
 		console.log("Send message succes!");
 	} catch (e) {
 		console.error("FAIL send message!", e);
@@ -61,7 +54,7 @@ function createTemporaryHtmlTemplateMessage(messageObject) {
 }
 
 async function respondChat(messageForm) {
-	await fetch("/chat/", {
+	return await fetch("/chat/", {
 		method: "POST",
 		body: messageForm,
 	});
@@ -83,4 +76,8 @@ function createHtmlTemplateMessage(messageObject) {
 			</div>
 		</div>
 		`);
+}
+
+function clearInput(inputField) {
+	inputField.value = "";
 }
