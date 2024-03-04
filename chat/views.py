@@ -8,20 +8,35 @@ from .models import Message, Chat
 from .forms import RegisterUserForm
 from .utils import *
 
-
+"""
+chat_id_number = static id for test chat
+"""
 chat_id_number = 1
 
 
 # Create your views here.
-@login_required(login_url='/login_user/')                           #Refers to login page
+"""
+@login_required(login_url='/login_user/'):
+Check if user is logged in, if not refers to login.
+"""
+@login_required(login_url='/login/')
 def chat(request):
-    if isRequestPost(request):                                    
-        testChat = Chat.objects.get(id=chat_id_number)              #Creates static Chatroom
+    """
+    Render content into chat page.
+    """
+    if isRequestPost(request):
+        """
+        Is request.method == 'POST' create a new message and return an Json-Object
+        testChat = static Chatroom
+        """                                 
+        testChat = Chat.objects.get(id=chat_id_number)
         new_message = createMessage(request, testChat)
-        serialized_message = serializeJson(request, new_message)    #json array from object
+        serialized_message = serializeJson(request, new_message)
         return JsonResponse(serialized_message, safe=False)
-    chat_messages = filterChatMessages(chat_id_number)              #returns Array
-    #Rendert URL chat/index.html mit Inhalt aus der Datenbank 'chat_message':
+    chat_messages = filterChatMessages(chat_id_number)
+    """
+    chat_messages returns Array
+    """
     return render(                                                  
         request, 
         'chat/chat.html', 
