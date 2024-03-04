@@ -7,11 +7,28 @@
 <!-- Render messages -->
 <div id="messageContainer">
 	{% for message in chat_messages %}
-	<div>
-		<span class="color-gray">[ {{ message.created_at }} ]</span>
-		<i>{{ message.author }}</i>: {{ message.text }}
+	<!-- prettier-ignore -->
+	{% if request.user.is_authenticated and request.user == message.author %}
+	<div class="message__right">
+		<div class="message--user message__bubble--user">
+			<div>
+				<span class="color-gray">[ {{ message.created_at }} ]</span>
+				<i>{{ message.author }}</i>:
+			</div>
+			{{ message.text }}
+		</div>
 	</div>
-	{% endfor %}
+	{% else %}
+	<div class="message__left">
+		<div class="message message__bubble">
+			<div>
+				<span class="color-gray">[ {{ message.created_at }} ]</span>
+				<i>{{ message.author }}</i>:
+			</div>
+			{{ message.text }}
+		</div>
+	</div>
+	{% endif %} {% endfor %}
 </div>
 
 <!-- Textfield with Floating Label -->

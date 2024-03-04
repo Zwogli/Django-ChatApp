@@ -24,11 +24,52 @@
 	display: flex;
 }
 .page-content {
+	height: calc(100dvh - 5rem);
 	padding: 5rem 2rem;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+}
+#messageContainer {
+	max-height: calc(100dvh - 5rem);
+	width: 80dvw;
+	overflow: auto;
+}
+.message__right {
+	display: flex;
+	width: 100%;
+	justify-content: flex-end;
+}
+.message__left {
+	display: flex;
+	width: 100%;
+	justify-content: flex-start;
+}
+.message {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 1rem;
+	padding: 1rem 2rem;
+	max-width: 50%;
+}
+.message--user {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	margin-bottom: 1rem;
+	padding: 1rem 2rem;
+	max-width: 50%;
+}
+.message__bubble {
+	width: 50%;
+	background-color: rgba(63, 81, 181, 0.5);
+	border-radius: 2rem;
+}
+.message__bubble--user {
+	width: 50%;
+	background-color: rgba(255, 64, 129, 0.5);
+	border-radius: 2rem;
 }
 .django-messages {
 	margin: 1rem 0 !important;

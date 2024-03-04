@@ -15,10 +15,6 @@ async function sendMessage() {
 		});
 
 		let json = await response.json();
-		console.log("json is: ", json);
-		// let objChat = JSON.parse(json);
-
-		console.log("Get Author name: ", json.fields.author_name);
 
 		removeTemporaryHtmlTemplateMessage();
 		createHtmlTemplateMessage(json);
