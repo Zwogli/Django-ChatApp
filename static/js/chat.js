@@ -7,15 +7,15 @@ async function sendMessage() {
 
 	try {
 		createTemporaryHtmlTemplateMessage(messageObject);
-		await respondChat(messageForm);
+		// await respondChat(messageForm);
 
-		// let response = await fetch("/chat/", {
-		// 	method: "POST",
-		// 	body: messageForm,
-		// });
+		let response = await fetch("/chat/", {
+			method: "POST",
+			body: messageForm,
+		});
 
-		// let json = await response.json();
-		// console.log("json is: ", json);
+		let json = await response.json();
+		console.log("json is: ", json);
 		removeTemporaryHtmlTemplateMessage();
 		createHtmlTemplateMessage(messageObject);
 
