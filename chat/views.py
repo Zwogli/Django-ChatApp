@@ -15,28 +15,29 @@ chat_id_number = 1
 
 
 # Create your views here.
-"""
-@login_required(login_url='/login_user/'):
-Check if user is logged in, if not refers to login.
-"""
-@login_required(login_url='/login/')
+
+
+@login_required(login_url='/login/')        #Check if user is logged in, if not refers to login.
 def chat(request):
     """
-    Render content into chat page.
+    If the request a POST method:
+    
+    :return JsonResponse: Sends an JSON back to the frontend
+    
+    else:
+    
+    :return render: Render HTML with render() with:
+    
+    :param  request:
+    :param  template_name:
+    :param  dict:
     """
-    if isRequestPost(request):
-        """
-        Is request.method == 'POST' create a new message and return an Json-Object
-        testChat = static Chatroom
-        """                                 
+    if isRequestPost(request):                             
         testChat = Chat.objects.get(id=chat_id_number)
         new_message = createMessage(request, testChat)
         serialized_message = serializeJson(request, new_message)
         return JsonResponse(serialized_message, safe=False)
     chat_messages = filterChatMessages(chat_id_number)
-    """
-    chat_messages returns Array
-    """
     return render(                                                  
         request, 
         'chat/chat.html', 
@@ -75,6 +76,11 @@ def login_user(request):
 
 
 def logout_user(request):
+    """
+    Logged out the logged in user and response a message.
+    
+    :return: Redirect to login URL
+    """
     logout(request)
     messages.success(request, ("You Have Been Logged Out."))
     return redirect('login_user')

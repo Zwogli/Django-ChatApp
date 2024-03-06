@@ -3,6 +3,15 @@ from .models import Message
 
 def isRequestPost(request):
     #Query by POST methode, Query = dt. Abfrage
+    """
+    :param request: HTTP request object.
+    :type request: HttpRequest
+    
+    Check request method:
+    
+    :return: True if the methode is 'POST'
+    :rtype: bool
+    """
     return request.method == 'POST'
 
 
@@ -11,7 +20,17 @@ def isUserExist(user):
 
 
 def createMessage(request, chat):
-    return (Message.objects.create(                       #Create a Chat with following elements (new_message = )
+    """
+    Create a Message object with the following parameters:
+
+    :param request: HTTP request object.
+    :type request: HttpRequest
+    :param chat: Chat ID.
+    :type chat: int
+
+    This function creates a Message object with attributes such as text, chat, author, and receiver.
+    """
+    return (Message.objects.create(
             text=request.POST['messageField'], 
             chat=chat, 
             author=request.user, 
@@ -21,11 +40,13 @@ def createMessage(request, chat):
 
 
 def serializeJson(request, object):
-    # Convert dateobject to datetime-Objekt
+    """Convert dateobject to datetime-Objekt"""
     created_at_datetime = object.created_at
-    # Convert dateobject to desired format
+    """Convert dateobject to desired format"""
     formatted_created_at = created_at_datetime.strftime('%B %d, %Y')
-    #Creates JSON-Object
+    """
+    :return: created JSON-Object
+    """
     return {
             'pk': object.pk,
             'fields': {
@@ -40,5 +61,5 @@ def serializeJson(request, object):
     
     
 def filterChatMessages(id_number):
-    #returns an array from chat__id=chat id number
+    """returns an array from chat__id=chat id number"""
     return Message.objects.filter(chat__id=id_number)

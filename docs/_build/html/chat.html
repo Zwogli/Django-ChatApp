@@ -82,7 +82,6 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#module-chat.views">chat.views module</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#chat.views.chat"><code class="docutils literal notranslate"><span class="pre">chat()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#chat.views.chat_id_number"><code class="docutils literal notranslate"><span class="pre">chat_id_number</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#chat.views.login_user"><code class="docutils literal notranslate"><span class="pre">login_user()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#chat.views.logout_user"><code class="docutils literal notranslate"><span class="pre">logout_user()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#chat.views.registry_user"><code class="docutils literal notranslate"><span class="pre">registry_user()</span></code></a></li>
@@ -473,17 +472,42 @@ object the first time, the query is executed.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="chat.utils.createMessage">
 <span class="sig-prename descclassname"><span class="pre">chat.utils.</span></span><span class="sig-name descname"><span class="pre">createMessage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chat</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#chat.utils.createMessage" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Create a Message object with the following parameters:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> (<em>HttpRequest</em>) – HTTP request object.</p></li>
+<li><p><strong>chat</strong> (<em>int</em>) – Chat ID.</p></li>
+</ul>
+</dd>
+</dl>
+<p>This function creates a Message object with attributes such as text, chat, author, and receiver.</p>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="chat.utils.filterChatMessages">
 <span class="sig-prename descclassname"><span class="pre">chat.utils.</span></span><span class="sig-name descname"><span class="pre">filterChatMessages</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id_number</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#chat.utils.filterChatMessages" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>returns an array from chat__id=chat id number</p>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="chat.utils.isRequestPost">
 <span class="sig-prename descclassname"><span class="pre">chat.utils.</span></span><span class="sig-name descname"><span class="pre">isRequestPost</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#chat.utils.isRequestPost" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> (<em>HttpRequest</em>) – HTTP request object.</p>
+</dd>
+</dl>
+<p>Check request method:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if the methode is ‘POST’</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="chat.utils.isUserExist">
@@ -493,7 +517,8 @@ object the first time, the query is executed.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="chat.utils.serializeJson">
 <span class="sig-prename descclassname"><span class="pre">chat.utils.</span></span><span class="sig-name descname"><span class="pre">serializeJson</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#chat.utils.serializeJson" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Convert dateobject to datetime-Objekt</p>
+</dd></dl>
 
 </section>
 <section id="module-chat.views">
@@ -501,14 +526,25 @@ object the first time, the query is executed.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="chat.views.chat">
 <span class="sig-prename descclassname"><span class="pre">chat.views.</span></span><span class="sig-name descname"><span class="pre">chat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#chat.views.chat" title="Link to this definition"></a></dt>
-<dd><p>Render content into chat page.</p>
-</dd></dl>
-
-<dl class="py data">
-<dt class="sig sig-object py" id="chat.views.chat_id_number">
-<span class="sig-prename descclassname"><span class="pre">chat.views.</span></span><span class="sig-name descname"><span class="pre">chat_id_number</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#chat.views.chat_id_number" title="Link to this definition"></a></dt>
-<dd><p>&#64;login_required(login_url=’/login_user/’):
-Check if user is logged in, if not refers to login.</p>
+<dd><p>If the request a POST method:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return JsonResponse<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Sends an JSON back to the frontend</p>
+</dd>
+</dl>
+<p>else:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return render<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Render HTML with render() with:</p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>request</strong> – </p></li>
+<li><p><strong>template_name</strong> – </p></li>
+<li><p><strong>dict</strong> – </p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
@@ -519,7 +555,13 @@ Check if user is logged in, if not refers to login.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="chat.views.logout_user">
 <span class="sig-prename descclassname"><span class="pre">chat.views.</span></span><span class="sig-name descname"><span class="pre">logout_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#chat.views.logout_user" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Logged out the logged in user and response a message.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Redirect to login URL</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="chat.views.registry_user">
