@@ -23,14 +23,16 @@ def chat(request):
     If the request a POST method:
     
     :return JsonResponse: Sends an JSON back to the frontend
+    :param  data: JSON-Oject
+    :param  safe: bool False
     
     else:
     
     :return render: Render HTML with render() with:
     
-    :param  request:
-    :param  template_name:
-    :param  dict:
+    :param  request: HTTP request object.
+    :param  template_name: url 'chat/chat.html'
+    :param  dict: {'chat_messages': chat_messages}
     """
     if isRequestPost(request):                             
         testChat = Chat.objects.get(id=chat_id_number)
@@ -46,13 +48,26 @@ def chat(request):
 
 
 def login_user(request):
+    """
+    If isRequestPost(request): 
+    
+    Check the Post methode and login inputs
+    
+    If isUserExist(user):
+    
+    Succesfully login, directs URL and render chat_messages
+    
+    else:
+    
+    Incorrect login, redirects to login page.
+    """
     redirect = request.GET.get('next')
     if isRequestPost(request):
-        user = authenticate(                                        #check login inputs
+        user = authenticate(
             username = request.POST.get('username'), 
             password = request.POST.get('password')
         )
-        if isUserExist(user):                                        #Succesfully login, directs URL
+        if isUserExist(user):
             login(request, user)
             if redirect=='next':
                 return HttpResponseRedirect(
@@ -65,7 +80,6 @@ def login_user(request):
                     {'chat_messages': chat_messages}
                 )
         else:
-            #Incorrect login, redirects:
             return render(
                 request, 
                 'auth/login.html', 
@@ -84,10 +98,24 @@ def logout_user(request):
     logout(request)
     messages.success(request, ("You Have Been Logged Out."))
     return redirect('login_user')
-    
 
 
 def registry_user(request):
+    """
+    :form: Creates a form registration
+    
+    Clean username and password
+
+    :user: authenticate
+    
+    Login as authenticate user and render chat.html with messages
+
+    else:
+
+    Load custom register form 'form.py'
+
+    :redirect: to registry page
+    """
     if isRequestPost(request):
         form = RegisterUserForm(request.POST)
         if form.is_valid():
@@ -103,5 +131,5 @@ def registry_user(request):
                 {'chat_messages': chat_messages}
             )
     else:
-        form = RegisterUserForm()       #Load custom register form 'form.py'
+        form = RegisterUserForm()
     return render(request, 'auth/registry.html', {'form': form,})

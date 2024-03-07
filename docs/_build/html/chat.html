@@ -185,6 +185,18 @@
 <dt class="sig sig-object py" id="chat.admin.MessageAdmin">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">chat.admin.</span></span><span class="sig-name descname"><span class="pre">MessageAdmin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">admin_site</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#chat.admin.MessageAdmin" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ModelAdmin</span></code></p>
+<p>Defines which information should be displayed in the admin dashboard</p>
+<dl class="field-list simple">
+<dt class="field-odd">Field<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+<dt class="field-even">List_display<span class="colon">:</span></dt>
+<dd class="field-even"><p>list</p>
+</dd>
+<dt class="field-odd">Search_fields<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="chat.admin.MessageAdmin.fields">
 <span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('chat',</span> <span class="pre">'text',</span> <span class="pre">'created_at',</span> <span class="pre">'author',</span> <span class="pre">'receiver')</span></em><a class="headerlink" href="#chat.admin.MessageAdmin.fields" title="Link to this definition"></a></dt>
@@ -233,10 +245,23 @@
 <dt class="sig sig-object py" id="chat.forms.RegisterUserForm">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">chat.forms.</span></span><span class="sig-name descname"><span class="pre">RegisterUserForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#chat.forms.RegisterUserForm" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">UserCreationForm</span></code></p>
+<p>Creates RegisterUserForm with standard model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Email<span class="colon">:</span></dt>
+<dd class="field-odd"><p>EmailField</p>
+</dd>
+<dt class="field-even">First_name<span class="colon">:</span></dt>
+<dd class="field-even"><p>CharField</p>
+</dd>
+<dt class="field-odd">Last_name<span class="colon">:</span></dt>
+<dd class="field-odd"><p>CharField</p>
+</dd>
+</dl>
 <dl class="py class">
 <dt class="sig sig-object py" id="chat.forms.RegisterUserForm.Meta">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#chat.forms.RegisterUserForm.Meta" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Defines which fields should be displayed in the form</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="chat.forms.RegisterUserForm.Meta.fields">
 <span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('username',</span> <span class="pre">'first_name',</span> <span class="pre">'last_name',</span> <span class="pre">'email',</span> <span class="pre">'password1',</span> <span class="pre">'password2')</span></em><a class="headerlink" href="#chat.forms.RegisterUserForm.Meta.fields" title="Link to this definition"></a></dt>
@@ -273,8 +298,9 @@
 <span id="chat-models-module"></span><h2>chat.models module<a class="headerlink" href="#module-chat.models" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="chat.models.Chat">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">chat.models.</span></span><span class="sig-name descname"><span class="pre">Chat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">created_at</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#chat.models.Chat" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">chat.models.</span></span><span class="sig-name descname"><span class="pre">Chat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#chat.models.Chat" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<p>Creates a Chat model with DateField()</p>
 <dl class="py exception">
 <dt class="sig sig-object py" id="chat.models.Chat.DoesNotExist">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#chat.models.Chat.DoesNotExist" title="Link to this definition"></a></dt>
@@ -335,8 +361,26 @@ object the first time, the query is executed.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="chat.models.Message">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">chat.models.</span></span><span class="sig-name descname"><span class="pre">Message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">created_at</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">author</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">receiver</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#chat.models.Message" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">chat.models.</span></span><span class="sig-name descname"><span class="pre">Message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#chat.models.Message" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<p>Creates a Message model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Text<span class="colon">:</span></dt>
+<dd class="field-odd"><p>CharField</p>
+</dd>
+<dt class="field-even">Created_at<span class="colon">:</span></dt>
+<dd class="field-even"><p>DateField</p>
+</dd>
+<dt class="field-odd">Chat<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ForeignKey</p>
+</dd>
+<dt class="field-even">Author<span class="colon">:</span></dt>
+<dd class="field-even"><p>ForeignKey</p>
+</dd>
+<dt class="field-odd">Receiver<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ForeignKey</p>
+</dd>
+</dl>
 <dl class="py exception">
 <dt class="sig sig-object py" id="chat.models.Message.DoesNotExist">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#chat.models.Message.DoesNotExist" title="Link to this definition"></a></dt>
@@ -445,6 +489,18 @@ object the first time, the query is executed.</p>
 <dt class="sig sig-object py" id="chat.models.RegistryUser">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">chat.models.</span></span><span class="sig-name descname"><span class="pre">RegistryUser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_id='id_%s'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_class=&lt;class</span> <span class="pre">'django.forms.utils.ErrorList'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_suffix=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">empty_permitted=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_order=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_required_attribute=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">renderer=None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#chat.models.RegistryUser" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Form</span></code></p>
+<p>Creates a Registry user with django forms</p>
+<dl class="field-list simple">
+<dt class="field-odd">Name<span class="colon">:</span></dt>
+<dd class="field-odd"><p>CharField</p>
+</dd>
+<dt class="field-even">Email<span class="colon">:</span></dt>
+<dd class="field-even"><p>EmailField</p>
+</dd>
+<dt class="field-odd">Password<span class="colon">:</span></dt>
+<dd class="field-odd"><p>CharField</p>
+</dd>
+</dl>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="chat.models.RegistryUser.base_fields">
 <span class="sig-name descname"><span class="pre">base_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'email':</span> <span class="pre">&lt;django.forms.fields.EmailField</span> <span class="pre">object&gt;,</span> <span class="pre">'name':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;,</span> <span class="pre">'password':</span> <span class="pre">&lt;django.forms.fields.CharField</span> <span class="pre">object&gt;}</span></em><a class="headerlink" href="#chat.models.RegistryUser.base_fields" title="Link to this definition"></a></dt>
@@ -531,6 +587,12 @@ object the first time, the query is executed.</p>
 <dt class="field-odd">Return JsonResponse<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Sends an JSON back to the frontend</p>
 </dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>data</strong> – JSON-Oject</p></li>
+<li><p><strong>safe</strong> – bool False</p></li>
+</ul>
+</dd>
 </dl>
 <p>else:</p>
 <dl class="field-list simple">
@@ -539,9 +601,9 @@ object the first time, the query is executed.</p>
 </dd>
 <dt class="field-even">Parameters<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>request</strong> – </p></li>
-<li><p><strong>template_name</strong> – </p></li>
-<li><p><strong>dict</strong> – </p></li>
+<li><p><strong>request</strong> – HTTP request object.</p></li>
+<li><p><strong>template_name</strong> – url ‘chat/chat.html’</p></li>
+<li><p><strong>dict</strong> – {‘chat_messages’: chat_messages}</p></li>
 </ul>
 </dd>
 </dl>
@@ -550,7 +612,13 @@ object the first time, the query is executed.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="chat.views.login_user">
 <span class="sig-prename descclassname"><span class="pre">chat.views.</span></span><span class="sig-name descname"><span class="pre">login_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#chat.views.login_user" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>If isRequestPost(request):</p>
+<p>Check the Post methode and login inputs</p>
+<p>If isUserExist(user):</p>
+<p>Succesfully login, directs URL and render chat_messages</p>
+<p>else:</p>
+<p>Incorrect login, redirects to login page.</p>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="chat.views.logout_user">
@@ -566,7 +634,26 @@ object the first time, the query is executed.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="chat.views.registry_user">
 <span class="sig-prename descclassname"><span class="pre">chat.views.</span></span><span class="sig-name descname"><span class="pre">registry_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#chat.views.registry_user" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Form<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Creates a form registration</p>
+</dd>
+</dl>
+<p>Clean username and password</p>
+<dl class="field-list simple">
+<dt class="field-odd">User<span class="colon">:</span></dt>
+<dd class="field-odd"><p>authenticate</p>
+</dd>
+</dl>
+<p>Login as authenticate user and render chat.html with messages</p>
+<p>else:</p>
+<p>Load custom register form ‘form.py’</p>
+<dl class="field-list simple">
+<dt class="field-odd">Redirect<span class="colon">:</span></dt>
+<dd class="field-odd"><p>to registry page</p>
+</dd>
+</dl>
+</dd></dl>
 
 </section>
 <section id="module-chat">
