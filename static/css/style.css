@@ -30,7 +30,7 @@ body {
 	flex-direction: column;
 	gap: 0.5rem;
 }
-.form-style {
+.form__chat {
 	margin-top: 2rem !important;
 }
 .htmlTemplateMessage {
@@ -154,9 +154,44 @@ body {
 	background: rgba(63, 81, 181, 0.6);
 }
 
+@media screen and (max-width: 600px) {
+	.message__bubble,
+	.message__bubble--user {
+		width: 80%;
+	}
+	/* .message__bubble--user {
+		width: 80%;
+	} */
+	.message,
+	.message--user {
+		max-width: 80%;
+	}
+}
+
 @media screen and (max-width: 550px) {
 	.div-row {
 		flex-direction: column;
 		gap: unset;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	#messageContainer {
+		padding: 0 1rem;
+	}
+}
+
+@media screen and (max-width: 450px) {
+	.form__chat {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		width: 100%;
+	}
+	.mdl-textfield {
+		width: 90%;
+	}
+	.submit__chat {
+		width: 90%;
 	}
 }
