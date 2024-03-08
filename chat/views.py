@@ -8,6 +8,8 @@ from .models import Message, Chat
 from .forms import RegisterUserForm
 from .utils import *
 
+# import pdb #python debbuger
+
 """
 chat_id_number = static id for test chat
 """
@@ -61,7 +63,7 @@ def login_user(request):
     
     Incorrect login, redirects to login page.
     """
-    redirect = request.GET.get('next')
+    redirect_extract = request.GET.get('next')
     if isRequestPost(request):
         user = authenticate(
             username = request.POST.get('username'), 
@@ -69,24 +71,20 @@ def login_user(request):
         )
         if isUserExist(user):
             login(request, user)
-            if redirect=='next':
+            if redirect_extract=='next':
                 return HttpResponseRedirect(
-                    request.POST.get('redirect')
+                    request.POST.get('redirect_extract')
                 )
             else:
-                chat_messages = filterChatMessages(chat_id_number) 
-                return render(
-                    request, 'chat/chat.html', 
-                    {'chat_messages': chat_messages}
-                )
+                return redirect('chat')
         else:
             return render(
                 request, 
                 'auth/login.html', 
                 {'wrongPassword': True}, 
-                {'redirect':redirect}
+                {'redirect':redirect_extract}
             )
-    return render(request, 'auth/login.html', {'redirect': redirect})
+    return render(request, 'auth/login.html', {'redirect': redirect_extract})
 
 
 def logout_user(request):
@@ -124,12 +122,7 @@ def registry_user(request):
             password = form.cleaned_data['password1']
             user = authenticate(username=username, password=password)
             login(request, user)
-            chat_messages = filterChatMessages(chat_id_number)
-            return render(
-                request, 
-                'chat/chat.html', 
-                {'chat_messages': chat_messages}
-            )
+            return redirect('chat')
     else:
         form = RegisterUserForm()
     return render(request, 'auth/registry.html', {'form': form,})
