@@ -4,7 +4,9 @@ async function sendMessage() {
 	let messageForm = new FormData();
 	messageForm.append("messageField", messageField.value); // append = anhängen
 	messageForm.append("csrfmiddlewaretoken", csrfToken);
-
+	if (isMessageEmpty()) {
+		return;
+	}
 	try {
 		createNewMessage(messageObject, messageForm);
 		clearInput(messageField);
@@ -12,6 +14,10 @@ async function sendMessage() {
 	} catch (e) {
 		console.error("FAIL send message!", e);
 	}
+}
+
+function isMessageEmpty(){
+	return messageField.value === ""
 }
 
 async function createNewMessage(messageObject, messageForm) {
