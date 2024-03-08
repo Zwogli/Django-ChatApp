@@ -12,10 +12,98 @@
 	-->
 
 		<div class="mdl-card__supporting-text">
-			<form method="POST" action="{% url 'registry_user' %}">
+			<form
+				class="form--gap"
+				method="POST"
+				action="{% url 'registry_user' %}"
+			>
 				{% csrf_token %}
 				<!--prettier-ignore-->
-				{{ form.as_p }}
+				<!-- {{ form.as_p }} -->
+
+				<!-- Benutzername Eingabefeld -->
+				<div class="form--gap">
+					{{ form.username.label_tag }}
+					<small>({{ form.username.help_text }})</small>
+					{{ form.username }}
+					<!--prettier-ignore-->
+					{% if form.username.errors %}
+					<ul class="errorlist">
+						{% for error in form.username.errors %}
+						<li>{{ error }}</li>
+						{% endfor %}
+					</ul>
+					{% endif %}
+				</div>
+
+				<!-- Vorname Eingabefeld -->
+				<div class="form--gap">
+					{{ form.first_name.label_tag }} {{ form.first_name }}
+					<!--prettier-ignore-->
+					{% if form.first_name.errors %}
+					<ul class="errorlist">
+						{% for error in form.first_name.errors %}
+						<li>{{ error }}</li>
+						{% endfor %}
+					</ul>
+					{% endif %}
+				</div>
+
+				<!-- Nachname Eingabefeld -->
+				<div class="form--gap">
+					{{ form.last_name.label_tag }} {{ form.last_name }}
+					<!--prettier-ignore-->
+					{% if form.last_name.errors %}
+					<ul class="errorlist">
+						{% for error in form.last_name.errors %}
+						<li>{{ error }}</li>
+						{% endfor %}
+					</ul>
+					{% endif %}
+				</div>
+
+				<!-- E-Mail Eingabefeld -->
+				<div class="form--gap">
+					{{ form.email.label_tag }} {{ form.email }}
+					<!--prettier-ignore-->
+					{% if form.email.errors %}
+					<ul class="errorlist">
+						{% for error in form.email.errors %}
+						<li>{{ error }}</li>
+						{% endfor %}
+					</ul>
+					{% endif %}
+				</div>
+
+				<!-- Passwort1 Eingabefeld -->
+				<div class="form--gap">
+					{{ form.password1.label_tag }}
+					<small>{{ form.password1.help_text }}</small>
+					{{ form.password1 }}
+					<!--prettier-ignore-->
+					{% if form.password1.errors %}
+					<ul class="errorlist">
+						{% for error in form.password1.errors %}
+						<li>{{ error }}</li>
+						{% endfor %}
+					</ul>
+					{% endif %}
+				</div>
+
+				<!-- Passwort2 Eingabefeld -->
+				<div class="form--gap">
+					{{ form.password2.label_tag }}
+					<small>({{ form.password2.help_text }})</small>
+					{{ form.password2 }}
+					<!--prettier-ignore-->
+					{% if form.password2.errors %}
+					<ul class="errorlist">
+						{% for error in form.password2.errors %}
+						<li>{{ error }}</li>
+						{% endfor %}
+					</ul>
+					{% endif %}
+				</div>
 
 				<button
 					class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent btn-registry"

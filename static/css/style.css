@@ -25,6 +25,11 @@ body {
 	flex-direction: column;
 	gap: 1rem;
 }
+.form--gap {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
 .form-style {
 	margin-top: 2rem !important;
 }
@@ -39,6 +44,9 @@ body {
 	align-items: center;
 }
 .page-auth {
+	width: 100%;
+	display: flex;
+	justify-content: center;
 	padding: 5rem 0;
 }
 .page-chat {
