@@ -14,12 +14,14 @@ Examples:
 1. Import the include() function: from django.urls import include, path
 2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
 from django.urls import path
+from django.shortcuts import redirect
+from django.contrib import admin
 
 from chat.views import chat, login_user, logout_user, registry_user
 
 urlpatterns = [
+    path('', lambda request: redirect('chat')),
     path('admin/', admin.site.urls),
     path('chat/', chat, name="chat"),
     path('login/', login_user, name="login_user"),
