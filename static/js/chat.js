@@ -6,16 +6,20 @@ async function sendMessage() {
 	messageForm.append("csrfmiddlewaretoken", csrfToken);
 
 	try {
-		createTemporaryHtmlTemplateMessage(messageObject);
-		let responseChat = await respondChat(messageForm);
-		let jsonChat = await responseChat.json();
-		removeTemporaryHtmlTemplateMessage();
-		createHtmlTemplateMessage(jsonChat);
+		createNewMessage(messageObject, messageForm);
 		clearInput(messageField);
 		console.log("Send message succes!");
 	} catch (e) {
 		console.error("FAIL send message!", e);
 	}
+}
+
+async function createNewMessage(messageObject, messageForm) {
+	createTemporaryHtmlTemplateMessage(messageObject);
+	let responseChat = await respondChat(messageForm);
+	let jsonChat = await responseChat.json();
+	removeTemporaryHtmlTemplateMessage();
+	createHtmlTemplateMessage(jsonChat);
 }
 
 function createMessageObject() {
