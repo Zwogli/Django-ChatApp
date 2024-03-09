@@ -159,9 +159,7 @@ body {
 	.message__bubble--user {
 		width: 80%;
 	}
-	/* .message__bubble--user {
-		width: 80%;
-	} */
+
 	.message,
 	.message--user {
 		max-width: 80%;

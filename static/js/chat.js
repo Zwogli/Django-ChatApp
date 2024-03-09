@@ -1,3 +1,12 @@
+// JavaScript code to scroll to the bottom of the message container
+function scrollToBottom() {
+	var messageContainer = document.getElementById("messageContainer");
+	messageContainer.scrollTop = messageContainer.scrollHeight;
+}
+
+// Call the scrollToBottom function after the page loads or after new messages are added
+// window.onload = scrollToBottom;
+
 async function sendMessage() {
 	const messageObject = createMessageObject();
 	const csrfToken = document.getElementById("csrfToken").value;
@@ -10,14 +19,15 @@ async function sendMessage() {
 	try {
 		createNewMessage(messageObject, messageForm);
 		clearInput(messageField);
+		scrollToBottom();
 		console.log("Send message succes!");
 	} catch (e) {
 		console.error("FAIL send message!", e);
 	}
 }
 
-function isMessageEmpty(){
-	return messageField.value === ""
+function isMessageEmpty() {
+	return messageField.value === "";
 }
 
 async function createNewMessage(messageObject, messageForm) {

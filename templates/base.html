@@ -130,5 +130,22 @@
 				</div>
 			</main>
 		</div>
+
+		<!-- prettier-ignore -->
+		{% block scripts %}
+		<!-- Hier ist das Inline-JavaScript, um scrollToBottom() nach dem Laden der Seite aufzurufen -->
+		{% if request.path == '/chat/' %}
+		<script>
+			try {
+				window.onload = function () {
+					setTimeout(function () {
+						scrollToBottom();
+					}, 1);
+				};
+			} catch (error) {
+				console.error("Error executing scrollToBottom:", error);
+			}
+		</script>
+		{% endif %} {% endblock %}
 	</body>
 </html>
